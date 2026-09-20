@@ -1,1 +1,312 @@
-কে ভাই
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভূমি সেবা | হয়রানী মুক্ত</title>
+    <!-- Google Fonts: Noto Sans Bengali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            background: linear-gradient(145deg, #f0f7f0 0%, #e6f0e6 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #1e3a1e;
+        }
+
+        .card {
+            max-width: 750px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 40, 0, 0.35), 
+                        0 0 0 1px rgba(46, 125, 50, 0.15);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* হেডার */
+        .header {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+            padding: 32px 28px 28px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: "🌾";
+            position: absolute;
+            font-size: 120px;
+            right: -20px;
+            bottom: -30px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: -0.3px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header h1 span {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* সেবা প্রদানকারী সেকশন */
+        .providers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            padding: 28px 24px 16px;
+            background: #f9fdf9;
+            border-bottom: 2px dashed #c8e6c9;
+        }
+
+        .provider-item {
+            flex: 1 1 200px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px 16px 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(27, 94, 32, 0.08);
+            border: 1px solid #d0e8d0;
+            transition: all 0.2s ease;
+        }
+
+        .provider-item:hover {
+            border-color: #2e7d32;
+            box-shadow: 0 8px 18px rgba(27, 94, 32, 0.12);
+        }
+
+        .provider-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #2e7d32;
+            background: #e8f5e9;
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            margin-bottom: 10px;
+        }
+
+        .provider-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1b5e20;
+            line-height: 1.4;
+        }
+
+        .provider-icon {
+            font-size: 1.6rem;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        /* সেবা তালিকা */
+        .services-section {
+            padding: 24px 28px 32px;
+            background: #ffffff;
+        }
+
+        .services-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 6px solid #2e7d32;
+            padding-left: 18px;
+        }
+
+        .services-title span {
+            font-size: 1.8rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .service-item {
+            background: #f1f8f1;
+            padding: 14px 18px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #1e3a1e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #c8e6c9;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .service-item:hover {
+            background: #2e7d32;
+            color: white;
+            border-color: #2e7d32;
+            transform: translateX(6px);
+        }
+
+        .service-item:hover .service-icon {
+            filter: brightness(0) invert(1);
+        }
+
+        .service-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        /* ফুটার */
+        .footer-note {
+            text-align: center;
+            padding: 14px 20px 18px;
+            background: #e8f5e9;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1b5e20;
+            border-top: 1px solid #c8e6c9;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-note i {
+            font-style: normal;
+            background: #2e7d32;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-left: 6px;
+        }
+
+        /* রেসপন্সিভ */
+        @media (max-width: 500px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .provider-name {
+                font-size: 1.1rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-item {
+                border-radius: 16px;
+                padding: 12px 16px;
+            }
+            .card {
+                border-radius: 24px;
+            }
+            .services-section {
+                padding: 20px 18px 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- হেডার -->
+    <div class="header">
+        <h1>
+            ভূমি বিষয়ক সেবা নিন <br>
+            হয়রানী মুক্ত থাকুন <br>
+            <span>✅ বিশ্বস্ত ও নির্ভরযোগ্য</span>
+        </h1>
+    </div>
+
+    <!-- সেবা প্রদানকারী -->
+    <div class="providers">
+        <div class="provider-item">
+            <div class="provider-label">প্রথম</div>
+            <div class="provider-name">
+                <span class="provider-icon">👨‍💼</span> মোঃ মোস্তাফিজুর রহমান
+            </div>
+        </div>
+        <div class="provider-item">
+            <div class="provider-label">দ্বিতীয়</div>
+            <div class="provider-name">
+                <span class="provider-icon">👨‍💼</span> মোঃ মোস্তাকিম রহমান
+            </div>
+        </div>
+    </div>
+
+    <!-- সেবাসমূহ -->
+    <div class="services-section">
+        <div class="services-title">
+            <span>📋</span> আমাদের সেবাসমূহ
+        </div>
+        <div class="services-grid">
+            <div class="service-item">
+                <span class="service-icon">💬</span> ভূমি বিষয়ক পরামর্শ
+            </div>
+            <div class="service-item">
+                <span class="service-icon">📜</span> দলিল সম্পাদন
+            </div>
+            <div class="service-item">
+                <span class="service-icon">📝</span> চুক্তিপত্র সম্পাদন
+            </div>
+            <div class="service-item">
+                <span class="service-icon">📂</span> খারিজের আবেদন
+            </div>
+            <div class="service-item">
+                <span class="service-icon">💰</span> খাজনা প্রদান
+            </div>
+            <div class="service-item">
+                <span class="service-icon">🗂️</span> রেকর্ড উত্তোলন
+            </div>
+            <div class="service-item">
+                <span class="service-icon">📑</span> ৪২(ক) ফাইল সাজানো
+            </div>
+            <div class="service-item">
+                <span class="service-icon">⚖️</span> মিসকেসের আবেদন
+            </div>
+        </div>
+    </div>
+
+    <!-- ফুটার -->
+    <div class="footer-note">
+        🌱 আপনার ভূমি সেবা এখন সহজ ও হয়রানীমুক্ত <i>বিশ্বস্ত সেবা</i>
+    </div>
+</div>
+
+</body>
+</html>
