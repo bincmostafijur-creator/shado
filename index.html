@@ -1,312 +1,953 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ভূমি সেবা | হয়রানী মুক্ত</title>
-    <!-- Google Fonts: Noto Sans Bengali -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ভূমি বিষয়ক সেবা - হয়রানী মুক্ত থাকুন | দলিল, খারিজ, খাজনা, রেকর্ড উত্তোলন">
+<title>ভূমি সেবা কেন্দ্র | হয়রানী মুক্ত সেবা</title>
 
-        body {
-            font-family: 'Noto Sans Bengali', sans-serif;
-            background: linear-gradient(145deg, #f0f7f0 0%, #e6f0e6 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #1e3a1e;
-        }
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        .card {
-            max-width: 750px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 36px;
-            box-shadow: 0 25px 50px -12px rgba(0, 40, 0, 0.35), 
-                        0 0 0 1px rgba(46, 125, 50, 0.15);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        .card:hover {
-            transform: translateY(-4px);
-        }
+<style>
+    :root {
+        --primary: #1b5e20;
+        --primary-light: #2e7d32;
+        --primary-dark: #0d3d12;
+        --accent: #f9a825;
+        --accent-hover: #f57f17;
+        --bg: #f4faf4;
+        --card: #ffffff;
+        --text: #1e2a1e;
+        --text-muted: #5a6b5a;
+        --border: #d4e8d4;
+        --shadow: 0 10px 30px rgba(27, 94, 32, 0.12);
+        --shadow-hover: 0 20px 45px rgba(27, 94, 32, 0.22);
+        --radius: 20px;
+        --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        /* হেডার */
-        .header {
-            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
-            padding: 32px 28px 28px;
-            text-align: center;
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-        }
+    [data-theme="dark"] {
+        --bg: #0f1a0f;
+        --card: #1a261a;
+        --text: #e8f5e8;
+        --text-muted: #a8b8a8;
+        --border: #2d3d2d;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        --shadow-hover: 0 20px 45px rgba(0, 0, 0, 0.6);
+        --primary: #4caf50;
+        --primary-light: #66bb6a;
+        --primary-dark: #2e7d32;
+    }
 
-        .header::after {
-            content: "🌾";
-            position: absolute;
-            font-size: 120px;
-            right: -20px;
-            bottom: -30px;
-            opacity: 0.1;
-            transform: rotate(-15deg);
-            pointer-events: none;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        .header h1 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            line-height: 1.4;
-            letter-spacing: -0.3px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
+    html { scroll-behavior: smooth; }
 
-        .header h1 span {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 16px;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-top: 8px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
+    body {
+        font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        min-height: 100vh;
+        transition: background 0.4s ease, color 0.4s ease;
+        overflow-x: hidden;
+    }
 
-        /* সেবা প্রদানকারী সেকশন */
-        .providers {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            justify-content: center;
-            padding: 28px 24px 16px;
-            background: #f9fdf9;
-            border-bottom: 2px dashed #c8e6c9;
-        }
+    /* ===== টপ বার ===== */
+    .topbar {
+        background: var(--primary-dark);
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 0.88rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
 
-        .provider-item {
-            flex: 1 1 200px;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 18px 16px 16px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(27, 94, 32, 0.08);
-            border: 1px solid #d0e8d0;
-            transition: all 0.2s ease;
-        }
+    .topbar-info {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
 
-        .provider-item:hover {
-            border-color: #2e7d32;
-            box-shadow: 0 8px 18px rgba(27, 94, 32, 0.12);
-        }
+    .topbar-info span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        opacity: 0.95;
+    }
 
-        .provider-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #2e7d32;
-            background: #e8f5e9;
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 30px;
-            margin-bottom: 10px;
-        }
+    .topbar-info i { color: var(--accent); }
 
-        .provider-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1b5e20;
-            line-height: 1.4;
-        }
+    .theme-toggle {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition);
+    }
 
-        .provider-icon {
-            font-size: 1.6rem;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
+    .theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.22);
+        transform: scale(1.05);
+    }
 
-        /* সেবা তালিকা */
-        .services-section {
-            padding: 24px 28px 32px;
-            background: #ffffff;
-        }
+    /* ===== হেডার ===== */
+    .hero {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--primary-dark) 100%);
+        color: #fff;
+        padding: 60px 24px 70px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
 
-        .services-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1b5e20;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-left: 6px solid #2e7d32;
-            padding-left: 18px;
-        }
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: 
+            radial-gradient(circle at 15% 20%, rgba(255,255,255,0.08) 0%, transparent 40%),
+            radial-gradient(circle at 85% 80%, rgba(249,168,37,0.12) 0%, transparent 45%);
+        pointer-events: none;
+    }
 
-        .services-title span {
-            font-size: 1.8rem;
-        }
+    .hero::after {
+        content: '🌾';
+        position: absolute;
+        font-size: 200px;
+        right: -40px;
+        bottom: -70px;
+        opacity: 0.08;
+        transform: rotate(-20deg);
+        pointer-events: none;
+    }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 12px;
-        }
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 20px;
+        border-radius: 40px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 22px;
+        backdrop-filter: blur(10px);
+        animation: pulse 2.5s infinite;
+    }
 
-        .service-item {
-            background: #f1f8f1;
-            padding: 14px 18px;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 1rem;
-            color: #1e3a1e;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid #c8e6c9;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
+    @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+        50% { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
+    }
 
-        .service-item:hover {
-            background: #2e7d32;
-            color: white;
-            border-color: #2e7d32;
-            transform: translateX(6px);
-        }
+    .hero h1 {
+        font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+        font-weight: 800;
+        line-height: 1.35;
+        margin-bottom: 14px;
+        position: relative;
+        z-index: 1;
+        letter-spacing: -0.5px;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
 
-        .service-item:hover .service-icon {
-            filter: brightness(0) invert(1);
-        }
+    .hero h1 .highlight {
+        color: var(--accent);
+        position: relative;
+    }
 
-        .service-icon {
-            font-size: 1.4rem;
-            line-height: 1;
-            flex-shrink: 0;
-        }
+    .hero p.subtitle {
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        opacity: 0.92;
+        max-width: 620px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        font-weight: 400;
+    }
 
-        /* ফুটার */
-        .footer-note {
-            text-align: center;
-            padding: 14px 20px 18px;
-            background: #e8f5e9;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #1b5e20;
-            border-top: 1px solid #c8e6c9;
-            letter-spacing: 0.3px;
-        }
+    .hero-buttons {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 32px;
+        position: relative;
+        z-index: 1;
+    }
 
-        .footer-note i {
-            font-style: normal;
-            background: #2e7d32;
-            color: white;
-            padding: 2px 12px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            margin-left: 6px;
-        }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: var(--transition);
+    }
 
-        /* রেসপন্সিভ */
-        @media (max-width: 500px) {
-            .header h1 {
-                font-size: 1.5rem;
-            }
-            .provider-name {
-                font-size: 1.1rem;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            .service-item {
-                border-radius: 16px;
-                padding: 12px 16px;
-            }
-            .card {
-                border-radius: 24px;
-            }
-            .services-section {
-                padding: 20px 18px 26px;
-            }
-        }
-    </style>
+    .btn-primary {
+        background: var(--accent);
+        color: #1a1a1a;
+        box-shadow: 0 8px 20px rgba(249, 168, 37, 0.35);
+    }
+
+    .btn-primary:hover {
+        background: var(--accent-hover);
+        transform: translateY(-3px);
+        box-shadow: 0 14px 30px rgba(249, 168, 37, 0.5);
+    }
+
+    .btn-outline {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+    }
+
+    .btn-outline:hover {
+        background: #fff;
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    /* ===== কন্টেইনার ===== */
+    .container {
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 0 22px;
+    }
+
+    /* ===== সেকশন টাইটেল ===== */
+    .section {
+        padding: 65px 0;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .section-title .label {
+        display: inline-block;
+        background: var(--primary-light);
+        color: #fff;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 6px 18px;
+        border-radius: 30px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+
+    .section-title h2 {
+        font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 12px;
+    }
+
+    .section-title p {
+        color: var(--text-muted);
+        max-width: 560px;
+        margin: 0 auto;
+        font-size: 1rem;
+    }
+
+    .section-title .divider {
+        width: 70px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        border-radius: 4px;
+        margin: 16px auto 0;
+    }
+
+    /* ===== প্রোভাইডার কার্ড ===== */
+    .providers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 26px;
+    }
+
+    .provider-card {
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 32px 26px;
+        text-align: center;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .provider-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .provider-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--primary-light);
+    }
+
+    .provider-avatar {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 18px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.4rem;
+        color: #fff;
+        box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+        border: 4px solid var(--bg);
+        position: relative;
+    }
+
+    .provider-avatar::after {
+        content: '\f00c';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        background: #25D366;
+        color: #fff;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--card);
+    }
+
+    .provider-role {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--primary-light);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 6px;
+    }
+
+    .provider-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 16px;
+        line-height: 1.4;
+    }
+
+    .provider-contact {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 18px;
+        border-radius: 30px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        border: 1.5px solid var(--border);
+        color: var(--text);
+        background: var(--bg);
+    }
+
+    .contact-btn:hover {
+        background: var(--primary-light);
+        color: #fff;
+        border-color: var(--primary-light);
+        transform: translateY(-2px);
+    }
+
+    .contact-btn.whatsapp:hover {
+        background: #25D366;
+        border-color: #25D366;
+    }
+
+    /* ===== সার্ভিস কার্ড ===== */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 18px;
+    }
+
+    .service-card {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 22px 20px;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 12px rgba(27, 94, 32, 0.06);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::after {
+        content: '\f061';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 18px;
+        font-size: 0.85rem;
+        color: var(--primary-light);
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: var(--transition);
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-light);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .service-card:hover::after {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .service-icon {
+        width: 52px;
+        height: 52px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, rgba(46, 125, 50, 0.12), rgba(46, 125, 50, 0.05));
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        color: var(--primary);
+        transition: var(--transition);
+    }
+
+    .service-card:hover .service-icon {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        transform: scale(1.08) rotate(-5deg);
+    }
+
+    .service-info h3 {
+        font-size: 1.02rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.4;
+        margin-bottom: 3px;
+    }
+
+    .service-info p {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+    }
+
+    /* ===== পরিসংখ্যান ===== */
+    .stats {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: #fff;
+        padding: 50px 22px;
+        border-radius: 28px;
+        margin: 20px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stats::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(249,168,37,0.15), transparent 70%);
+        border-radius: 50%;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 24px;
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+    }
+
+    .stat-item .number {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+        margin-bottom: 6px;
+    }
+
+    .stat-item .label {
+        font-size: 0.92rem;
+        opacity: 0.9;
+        font-weight: 500;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 45px 30px;
+        text-align: center;
+        border: 2px dashed var(--primary-light);
+        margin: 20px 0 60px;
+    }
+
+    .cta h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 10px;
+    }
+
+    .cta p {
+        color: var(--text-muted);
+        margin-bottom: 24px;
+    }
+
+    /* ===== ফুটার ===== */
+    footer {
+        background: var(--primary-dark);
+        color: #d8e8d8;
+        padding: 40px 22px 25px;
+        text-align: center;
+    }
+
+    footer h4 {
+        color: #fff;
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+    }
+
+    footer p {
+        font-size: 0.92rem;
+        opacity: 0.85;
+        max-width: 500px;
+        margin: 0 auto 16px;
+    }
+
+    footer .footer-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.12);
+        max-width: 1100px;
+        margin: 26px auto 18px;
+    }
+
+    footer .copyright {
+        font-size: 0.85rem;
+        opacity: 0.7;
+    }
+
+    /* ===== ফ্লোটিং বাটন ===== */
+    .floating-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: #25D366;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        cursor: pointer;
+        text-decoration: none;
+        transition: var(--transition);
+        z-index: 999;
+        animation: floatPulse 2s infinite;
+    }
+
+    .floating-btn:hover {
+        transform: scale(1.12) rotate(8deg);
+        box-shadow: 0 12px 32px rgba(37, 211, 102, 0.7);
+    }
+
+    @keyframes floatPulse {
+        0%, 100% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5); }
+        50% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 0 0 15px rgba(37, 211, 102, 0); }
+    }
+
+    /* ===== স্ক্রল অ্যানিমেশন ===== */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ===== রেসপন্সিভ ===== */
+    @media (max-width: 640px) {
+        .topbar { justify-content: center; text-align: center; }
+        .topbar-info { justify-content: center; gap: 12px; font-size: 0.8rem; }
+        .hero { padding: 45px 18px 55px; }
+        .hero-buttons { flex-direction: column; align-items: stretch; }
+        .btn { justify-content: center; }
+        .section { padding: 45px 0; }
+        .service-card::after { display: none; }
+        .services-grid { grid-template-columns: 1fr; }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        .stat-item .number { font-size: 1.8rem; }
+        .floating-btn { width: 52px; height: 52px; font-size: 1.4rem; bottom: 18px; right: 18px; }
+    }
+
+    @media (max-width: 380px) {
+        .stats-grid { grid-template-columns: 1fr; }
+    }
+</style>
 </head>
 <body>
 
-<div class="card">
-    <!-- হেডার -->
-    <div class="header">
-        <h1>
-            ভূমি বিষয়ক সেবা নিন <br>
-            হয়রানী মুক্ত থাকুন <br>
-            <span>✅ বিশ্বস্ত ও নির্ভরযোগ্য</span>
-        </h1>
+<!-- ===== টপ বার ===== -->
+<div class="topbar">
+    <div class="topbar-info">
+        <span><i class="fas fa-map-marker-alt"></i> বাংলাদেশ</span>
+        <span><i class="fas fa-clock"></i> সকাল ৯টা - রাত ৯টা</span>
+        <span><i class="fas fa-phone"></i> ০১৭XX-XXXXXX</span>
     </div>
-
-    <!-- সেবা প্রদানকারী -->
-    <div class="providers">
-        <div class="provider-item">
-            <div class="provider-label">প্রথম</div>
-            <div class="provider-name">
-                <span class="provider-icon">👨‍💼</span> মোঃ মোস্তাফিজুর রহমান
-            </div>
-        </div>
-        <div class="provider-item">
-            <div class="provider-label">দ্বিতীয়</div>
-            <div class="provider-name">
-                <span class="provider-icon">👨‍💼</span> মোঃ মোস্তাকিম রহমান
-            </div>
-        </div>
-    </div>
-
-    <!-- সেবাসমূহ -->
-    <div class="services-section">
-        <div class="services-title">
-            <span>📋</span> আমাদের সেবাসমূহ
-        </div>
-        <div class="services-grid">
-            <div class="service-item">
-                <span class="service-icon">💬</span> ভূমি বিষয়ক পরামর্শ
-            </div>
-            <div class="service-item">
-                <span class="service-icon">📜</span> দলিল সম্পাদন
-            </div>
-            <div class="service-item">
-                <span class="service-icon">📝</span> চুক্তিপত্র সম্পাদন
-            </div>
-            <div class="service-item">
-                <span class="service-icon">📂</span> খারিজের আবেদন
-            </div>
-            <div class="service-item">
-                <span class="service-icon">💰</span> খাজনা প্রদান
-            </div>
-            <div class="service-item">
-                <span class="service-icon">🗂️</span> রেকর্ড উত্তোলন
-            </div>
-            <div class="service-item">
-                <span class="service-icon">📑</span> ৪২(ক) ফাইল সাজানো
-            </div>
-            <div class="service-item">
-                <span class="service-icon">⚖️</span> মিসকেসের আবেদন
-            </div>
-        </div>
-    </div>
-
-    <!-- ফুটার -->
-    <div class="footer-note">
-        🌱 আপনার ভূমি সেবা এখন সহজ ও হয়রানীমুক্ত <i>বিশ্বস্ত সেবা</i>
-    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="থিম পরিবর্তন">
+        <i class="fas fa-moon" id="themeIcon"></i>
+        <span id="themeText">ডার্ক মোড</span>
+    </button>
 </div>
+
+<!-- ===== হিরো ===== -->
+<section class="hero">
+    <div class="hero-badge">
+        <i class="fas fa-shield-alt"></i> ১০০% বিশ্বস্ত ও নির্ভরযোগ্য সেবা
+    </div>
+    <h1>
+        ভূমি বিষয়ক সেবা নিন <br>
+        <span class="highlight">হয়রানী মুক্ত</span> থাকুন
+    </h1>
+    <p class="subtitle">
+        দলিল, খারিজ, খাজনা, রেকর্ড উত্তোলনসহ সকল ভূমি সেবা এখন এক জায়গায় — দ্রুত, নিরাপদ ও সাশ্রয়ী মূল্যে।
+    </p>
+    <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary">
+            <i class="fas fa-list-check"></i> সেবাসমূহ দেখুন
+        </a>
+        <a href="#contact" class="btn btn-outline">
+            <i class="fas fa-headset"></i> যোগাযোগ করুন
+        </a>
+    </div>
+</section>
+
+<!-- ===== সেবা প্রদানকারী ===== -->
+<section class="section container" id="providers">
+    <div class="section-title reveal">
+        <span class="label">আমাদের টিম</span>
+        <h2>সেবা প্রদানকারী</h2>
+        <p>অভিজ্ঞ ও নিবেদিতপ্রাণ দুজন পেশাদার আপনার সেবায় নিয়োজিত</p>
+        <div class="divider"></div>
+    </div>
+
+    <div class="providers-grid">
+        <!-- প্রথম -->
+        <div class="provider-card reveal">
+            <div class="provider-avatar">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="provider-role">প্রথম</div>
+            <div class="provider-name">মোঃ মোস্তাফিজুর রহমান</div>
+            <div class="provider-contact">
+                <a href="tel:+8801700000001" class="contact-btn">
+                    <i class="fas fa-phone"></i> কল
+                </a>
+                <a href="https://wa.me/8801700000001" target="_blank" class="contact-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ
+                </a>
+            </div>
+        </div>
+
+        <!-- দ্বিতীয় -->
+        <div class="provider-card reveal">
+            <div class="provider-avatar">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="provider-role">দ্বিতীয়</div>
+            <div class="provider-name">মোঃ মোস্তাকিম রহমান</div>
+            <div class="provider-contact">
+                <a href="tel:+8801700000002" class="contact-btn">
+                    <i class="fas fa-phone"></i> কল
+                </a>
+                <a href="https://wa.me/8801700000002" target="_blank" class="contact-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== সেবাসমূহ ===== -->
+<section class="section container" id="services" style="padding-top: 20px;">
+    <div class="section-title reveal">
+        <span class="label">আমাদের সেবা</span>
+        <h2>আমাদের সেবাসমূহ</h2>
+        <p>ভূমি সংক্রান্ত সকল সমস্যার সমাধান এক ছাদের নিচে</p>
+        <div class="divider"></div>
+    </div>
+
+    <div class="services-grid">
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-comments"></i></div>
+            <div class="service-info">
+                <h3>ভূমি বিষয়ক পরামর্শ</h3>
+                <p>বিশেষজ্ঞ পরামর্শ ও দিকনির্দেশনা</p>
+            </div>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-scroll"></i></div>
+            <div class="service-info">
+                <h3>দলিল সম্পাদন</h3>
+                <p>আইনসম্মত দলিল তৈরি ও রেজিস্ট্রেশন</p>
+            </div>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-file-signature"></i></div>
+            <div class="service-info">
+                <h3>চুক্তিপত্র সম্পাদন</h3>
+                <p>সকল প্রকার চুক্তিপত্র প্রস্তুতকরণ</p>
+            </div>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-folder-open"></i></div>
+            <div class="service-info">
+                <h3>খারিজের আবেদন</h3>
+                <p>দ্রুত ও সঠিক পদ্ধতিতে খারিজ</p>
+            </div>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-money-bill-wave"></i></div>
+            <div class="service-info">
+                <h3>খাজনা প্রদান</h3>
+                <p>অনলাইন ও অফলাইন খাজনা সেবা</p>
+            </div>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="service-info">
+                <h3>রেকর্ড উত্তোলন</h3>
+                <p>সিএস, এসএ, আরএস, বিএস রেকর্ড</p>
+            </div>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-book"></i></div>
+            <div class="service-info">
+                <h3>৪২(ক) ফাইল সাজানো</h3>
+                <p>সঠিক নিয়মে ফাইল প্রস্তুতকরণ</p>
+            </div>
+        </div>
+
+        <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-gavel"></i></div>
+            <div class="service-info">
+                <h3>মিসকেসের আবেদন</h3>
+                <p>মিসকেস দাখিল ও ব্যবস্থাপনা</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== পরিসংখ্যান ===== -->
+<section class="container">
+    <div class="stats reveal">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="number" data-count="500">০</div>
+                <div class="label">সন্তুষ্ট গ্রাহক</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" data-count="8">০</div>
+                <div class="label">সেবার ধরন</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" data-count="10">০</div>
+                <div class="label">বছরের অভিজ্ঞতা</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" data-count="100">০</div>
+                <div class="label">% সন্তুষ্টি</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="container" id="contact">
+    <div class="cta reveal">
+        <h3><i class="fas fa-handshake" style="color: var(--primary-light);"></i> আজই যোগাযোগ করুন</h3>
+        <p>আপনার ভূমি সংক্রান্ত যেকোনো সমস্যার সমাধানে আমরা প্রস্তুত। সরাসরি কল বা হোয়াটসঅ্যাপে মেসেজ দিন।</p>
+        <div class="hero-buttons">
+            <a href="tel:+8801700000001" class="btn btn-primary" style="background: var(--primary); color: #fff;">
+                <i class="fas fa-phone-volume"></i> কল করুন
+            </a>
+            <a href="https://wa.me/8801700000001" target="_blank" class="btn btn-outline" style="background: #25D366; color: #fff; border-color: #25D366;">
+                <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ফুটার ===== -->
+<footer>
+    <h4>🌾 ভূমি সেবা কেন্দ্র</h4>
+    <p>হয়রানীমুক্ত, দ্রুত ও নির্ভরযোগ্য ভূমি সেবা — আপনার পাশে সবসময়।</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">© ২০২৫ ভূমি সেবা কেন্দ্র | সর্বস্বত্ব সংরক্ষিত</p>
+</footer>
+
+<!-- ===== ফ্লোটিং হোয়াটসঅ্যাপ ===== -->
+<a href="https://wa.me/8801700000001" target="_blank" class="floating-btn" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    /* ===== থিম টগল ===== */
+    function toggleTheme() {
+        const html = document.documentElement;
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        if (html.getAttribute('data-theme') === 'dark') {
+            html.removeAttribute('data-theme');
+            icon.className = 'fas fa-moon';
+            text.textContent = 'ডার্ক মোড';
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            icon.className = 'fas fa-sun';
+            text.textContent = 'লাইট মোড';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    /* সেভ করা থিম লোড */
+    (function () {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('themeIcon').className = 'fas fa-sun';
+            document.getElementById('themeText').textContent = 'লাইট মোড';
+        }
+    })();
+
+    /* ===== স্ক্রল রিভিল ===== */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('active'), i * 70);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    /* ===== কাউন্টার অ্যানিমেশন ===== */
+    const counters = document.querySelectorAll('.number[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = +el.dataset.count;
+                let current = 0;
+                const step = Math.ceil(target / 60);
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = current.toLocaleString('bn-BD');
+                }, 25);
+                counterObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(c => counterObserver.observe(c));
+
+    /* ===== স্মুথ স্ক্রল (Fallback) ===== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
